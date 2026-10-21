@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 
-const asset = (name: string) => `/assets/${name}`
+const asset = (name: string) => `${import.meta.env.BASE_URL}assets/${name}`
 
 function Icon({ name }: { name: "mail" | "globe" | "phone" | "calendar" | "user" | "folder" | "arrow" }) {
   const paths: Record<typeof name, ReactNode> = {
