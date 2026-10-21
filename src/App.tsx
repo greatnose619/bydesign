@@ -1,9 +1,13 @@
-import { useState, type ReactNode } from "react"
+import type { ReactNode } from "react"
 
 const asset = (name: string) => `${import.meta.env.BASE_URL}assets/${name}`
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return <svg aria-hidden="true" viewBox="0 0 20 20"><path d={diagonal ? "M5 15 15 5m-8 0h8v8" : "M3 10h14m-5-5 5 5-5 5"} /></svg>
+}
+
+function LocationPin() {
+  return <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>
 }
 
 function SectionTitle({ children, action }: { children: ReactNode; action?: ReactNode }) {
@@ -15,7 +19,7 @@ const projects = [
     title: "Interactive Data Dashboard",
     type: "Internal Tools",
     image: "project-1.png",
-    href: "https://www.google.com/",
+    href: "#/work/brandify",
   },
   {
     title: "Personal Finance Tracker",
@@ -84,15 +88,7 @@ const experience = [
   },
 ]
 
-function App() {
-  const [copied, setCopied] = useState(false)
-
-  const copyEmail = async () => {
-    await navigator.clipboard?.writeText("hey@henrywalker.com")
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 1800)
-  }
-
+export function HomePage() {
   return <main>
     <nav className="top-nav" aria-label="Page sections">
       <a href="#intro">Intro</a>
@@ -109,19 +105,15 @@ function App() {
           <div className="identity">
             <h1>Nate Yeh</h1>
             <p className="job-title">Product designer</p>
-            <button type="button" className="email-copy" onClick={copyEmail}>
-              <span>{copied ? "Copied!" : "hey@henrywalker.com"}</span>
-              <svg aria-hidden="true" viewBox="0 0 20 20"><rect x="6" y="6" width="10" height="10" rx="2" /><path d="M4 13H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1" /></svg>
-            </button>
+            <p className="location"><LocationPin /><span>Taipei, Taiwan</span></p>
           </div>
         </div>
       </header>
 
       <section className="page-section about" id="about">
-        <SectionTitle>About me</SectionTitle>
+        <SectionTitle>About</SectionTitle>
         <div className="body-copy">
-          <p>Hello, I'm Nate Yeh, a product designer with 7+ years of experience building thoughtful, user-focused products for web and mobile.</p>
-          <p>My journey began with a fascination for how digital products work and a desire to make them feel effortless. Over the years, I've combined interface design, front-end development and product thinking to turn complex ideas into intuitive experiences.</p>
+          <p>A product designer who loves bringing ideas to life by blending software and hardware to create intuitive experiences. Collaborates with designers, engineers, and PMs to turn complex challenges into seamless user solutions.</p>
         </div>
       </section>
 
@@ -156,5 +148,3 @@ function App() {
 
   </main>
 }
-
-export default App
